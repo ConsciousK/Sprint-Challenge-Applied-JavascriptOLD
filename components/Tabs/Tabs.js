@@ -6,20 +6,18 @@ class TabLink {
 
     // Get the `data-tab` value from this.tabElement and store it here
     // this.tabData = ; 
-    this.tabData = document.querySelector(`.tab[data-tab='${this.tabElement.dataset.tab}']`);
+    this.tabData = this.tabElement.dataset.tab;
 
     if (this.tabData === 'all') {
       this.cards = document.querySelectorAll('.card');
     } else {
-      this.cards = document.querySelectorAll(`.card[data-tab='${this.tabData.dataset.tab}']`);
+      this.cards = document.querySelectorAll(`.card[data-tab='${this.tabData}']`);
     }
     console.log(this.cards)
     // Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
     
-    this.cards = Array.from(this.cards).map(() => {
-      this.cardElement = new TabCard(cardElement);
-    });
-  
+    this.cards = Array.from(this.cards).map(cardElement => new TabCard(cardElement));
+    
     // Add a click event that invokes this.selectTab
     this.tabElement.addEventListener('click', () => this.selectTab());
   }
